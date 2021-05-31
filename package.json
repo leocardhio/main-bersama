@@ -19,13 +19,12 @@
     "youch-terminal": "^1.1.1"
   },
   "dependencies": {
-    "@adonisjs/ace": "^11.0.1",
     "@adonisjs/auth": "^8.0.4",
     "@adonisjs/core": "^5.1.7",
     "@adonisjs/lucid": "^14.1.0",
-    "@adonisjs/mail": "^5.2.3",
+    "@adonisjs/mail": "^7.1.1",
     "@adonisjs/repl": "^3.1.2",
-    "@adonisjs/view": "^3.1.0",
+    "@adonisjs/view": "^6.0.2",
     "adonis5-swagger": "^1.2.3",
     "luxon": "^1.27.0",
     "mysql": "^2.18.1",
