@@ -2,6 +2,25 @@ import { DateTime } from 'luxon'
 import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import UserHasBooking from './UserHasBooking'
 
+/**
+ * @swagger
+ * definitions:
+ *    Booking:
+ *      type: object
+ *      properties:
+ *        play_date_start:
+ *          type: string
+ *          format: date
+ *        play_date_end:
+ *          type: string
+ *        field_id:
+ *          type: uint
+ *      required:
+ *        -play_date_start
+ *        -play_date_end
+ *        -field_id
+ */
+
 export default class Booking extends BaseModel {
   @column({ isPrimary: true })
   public id: number

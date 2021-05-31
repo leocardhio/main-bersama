@@ -6,12 +6,32 @@ import {
   BaseModel,
   hasMany,
   HasMany,
-  manyToMany
 } from '@ioc:Adonis/Lucid/Orm'
 import UserHasBooking from './UserHasBooking'
 import Booking from './Booking'
 import Venue from './Venue'
 
+/**
+ * @swagger
+ * definitions:
+ *    User:
+ *      type: object
+ *      properties:
+ *        name:
+ *          type: string
+ *        email:
+ *          type: string
+ *          format: email
+ *        password:
+ *          type: string
+ *        role:
+ *          type: string
+ *      required:
+ *        -name
+ *        -email
+ *        -password
+ *        -role
+ */
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number

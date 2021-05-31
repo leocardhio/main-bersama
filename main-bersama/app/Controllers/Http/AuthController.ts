@@ -6,6 +6,28 @@ import UserValidator from 'App/Validators/UserValidator'
 import Mail from '@ioc:Adonis/Addons/Mail'
 
 export default class AuthController {
+    /**
+     * 
+     * @swagger
+     * paths:
+     *      /api/v1/register:
+     *          post:
+     *              tags:
+     *                  - Authentication
+     *              description: Send an email of OTP code to be used in `otp-confirmation` endpoint
+     *              summary: create new user
+     *              requestBody:
+     *                  required: true
+     *                  content:
+     *                      application/x-www-form-urlencoded:
+     *                          schema:
+     *                              $ref: '#definitions/User'
+     *              responses:
+     *                  201:
+     *                      description: 'success, check OTP code on your email'
+     *                  422:
+     *                      description: 'false entity on request'
+     */
     public async register({ request, response }: HttpContextContract){
         try {
             const data = await request.validate(UserValidator)
@@ -29,7 +51,39 @@ export default class AuthController {
             response.unprocessableEntity({message: err})
         }
     }
-
+    /**
+     * 
+     * @swagger
+     * paths:
+     *      /api/v1/login:
+     *          post:
+     *              security:
+     *                  - bearerAuth: []
+     *              tags:
+     *                  - Authentication
+     *              summary: login to user account
+     *              description: Returning an bearer token which can be used to browse the website
+     *              requestBody:
+     *                  required: true
+     *                  content:
+     *                      application/x-www-form-urlencoded:
+     *                          schema:
+     *                              type: object
+     *                              properties:
+     *                                  email:
+     *                                      type: string
+     *                                      format: email
+     *                                  password:
+     *                                      type: string
+     *                              required:
+     *                                  - email
+     *                                  - password
+     *              responses:
+     *                  200:
+     *                      description: 'login success'
+     *                  417:
+     *                      description: 'Account not verified'
+     */
     public async login({request, response, auth}: HttpContextContract){
         const loginValidator = schema.create({
             email: schema.string({},[
@@ -68,6 +122,39 @@ export default class AuthController {
         }
     }
 
+    /**
+     * 
+     * @swagger
+     * paths:
+     *      /api/v1/otp-confirmation:
+     *          post:
+     *              tags:
+     *                  - Authentication
+     *              description: altering is_verified value in database to `true`
+     *              summary: otp confirmation for certain email
+     *              requestBody:
+     *                  required: true
+     *                  content:
+     *                      application/x-www-form-urlencoded:
+     *                          schema:
+     *                              type: object
+     *                              properties:
+     *                                  email:
+     *                                      type: string
+     *                                      format: email
+     *                                  otp_code:
+     *                                      type: integer
+     *                              required:
+     *                                  - email
+     *                                  - otp_code
+     *              responses:
+     *                  200:
+     *                      description: 'account verified'
+     *                  417:
+     *                      description: 'wrong otp'
+     *                  404:
+     *                      description: 'email not found'
+     */
     public async otpConfirmation({ request, response }:HttpContextContract){
         let email = request.body().email
         let otpraw = request.body().otp_code
