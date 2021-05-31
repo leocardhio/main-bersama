@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CheckOwner {
-  public async handle ({request,response,auth}: HttpContextContract, next: () => Promise<void>) {
+  public async handle ({response,auth}: HttpContextContract, next: () => Promise<void>) {
     // code for middleware goes here. ABOVE THE NEXT CALL
     let isOwner = (auth.user?.role=='owner')?true:false
     if (isOwner){

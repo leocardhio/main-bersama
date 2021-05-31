@@ -24,7 +24,7 @@ export default class VenuesController {
      *                  401:
      *                      description: 'access denied'
      */
-    public async index({request, response} : HttpContextContract){
+    public async index({response} : HttpContextContract){
         let data = await Database.from('venues').select('*')
         response.ok({message: 'loaded!', data})
     }

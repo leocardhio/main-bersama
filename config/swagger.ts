@@ -1,5 +1,4 @@
 import { SwaggerConfig } from '@ioc:Adonis/Addons/Swagger'
-import { http } from './app'
 
 export default {
 	uiEnabled: true, //disable or enable swaggerUi route

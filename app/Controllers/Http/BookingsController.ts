@@ -131,8 +131,7 @@ export default class BookingsController {
                 user_id: userauth?.id,
                 booking_id: request.param('id')
             }).delete()
-            console.log(data)
-            if (data==0){ //biarin aja, bener kok
+            if (data.length==0){ //biarin aja, bener kok
                 throw('Data tidak tersedia')
             }
             response.ok({message: 'unjoin berhasil'})
