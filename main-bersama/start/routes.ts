@@ -20,6 +20,27 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.group(() => {
+    Route.post('/register', 'AuthController.register').as('auth.register')
+    Route.post('/login','AuthController.login').as('auth.login')
+    Route.post('/otp-confirmation', 'AuthController.otpConfirmation').as('auth.otpconfirm')
+    
+    Route.group(() =>{
+        Route.group(() => {
+            Route.get('/venues', 'VenuesController.index').as('venues.index')
+            Route.post('/venues', 'VenuesController.store').as('venues.store')
+            Route.get('/venues/:id', 'VenuesController.show').as('venues.show')
+            Route.put('/venues/:id', 'VenuesController.update').as('venues.update')
+            Route.resource('venues.fields', 'FieldsController').apiOnly()
+        }).middleware(['chkOwner','chkVerify'])
+
+        Route.group(()=>{
+            Route.post('/venues/:id/bookings', 'VenuesController.booking').as('venues.booking')
+            Route.get('/schedule','BookingsController.schedule').as('booking.schedule')
+            Route.get('/bookings','BookingsController.index').as('booking.index')
+            Route.get('/bookings/:id','BookingsController.show').as('booking.show')
+            Route.put('/bookings/:id/join','BookingsController.join').as('booking.join')
+            Route.put('/bookings/:id/unjoin', 'BookingsController.unjoin').as('booking.unjoin')
+        }).middleware(['chkUser','chkVerify'])
+    }).middleware(['auth'])
+}).prefix('/api/v1')

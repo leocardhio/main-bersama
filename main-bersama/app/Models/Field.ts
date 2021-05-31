@@ -1,13 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import Booking from './Booking'
 
-enum FieldType {
-  'soccer',
-  'minisoccer',
-  'futsal',
-  'basketball',
-  'volleyball'
-}
 
 export default class Field extends BaseModel {
   @column({ isPrimary: true })
@@ -17,7 +11,7 @@ export default class Field extends BaseModel {
   public name: string
 
   @column()
-  public type: FieldType
+  public type: string
 
   @column()
   public venue_id: number
@@ -27,4 +21,9 @@ export default class Field extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Booking,{
+    foreignKey: 'field_id'
+  })
+  public bookings: HasMany<typeof Booking>
 }

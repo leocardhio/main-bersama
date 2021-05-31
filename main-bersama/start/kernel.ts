@@ -41,4 +41,8 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
+  chkUser: 'App/Middleware/CheckUser',
+  chkOwner: 'App/Middleware/CheckOwner',
+  chkVerify: 'App/Middleware/Acl',
+  auth: 'App/Middleware/Auth'
 })

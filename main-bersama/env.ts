@@ -15,6 +15,11 @@
 import Env from '@ioc:Adonis/Core/Env'
 
 export default Env.rules({
+	CACHE_VIEWS: Env.schema.boolean(),
+	SMTP_HOST: Env.schema.string({ format: 'host' }),
+    SMTP_PORT: Env.schema.number(),
+    SMTP_USERNAME: Env.schema.string(),
+    SMTP_PASSWORD: Env.schema.string(),
 	DB_CONNECTION: Env.schema.string(),
 	MYSQL_HOST: Env.schema.string({ format: 'host' }),
     MYSQL_PORT: Env.schema.number(),

@@ -29,14 +29,17 @@ export default class UserValidator {
 		  rules.maxLength(45)
 	  ]),
 	  email: schema.string({},[
-		  rules.maxLength(45)
+		  rules.maxLength(45),
+		  rules.email(),
+		  rules.unique({
+			  table: 'users',
+			  column: 'email'
+		  })
 	  ]),
 	  password: schema.string({},[
 		rules.maxLength(45)
 	  ]),
-	  role: schema.string({},[
-		rules.maxLength(45)
-	  ]),
+	  role: schema.enum(['owner', 'user'])
   })
 
 	/**

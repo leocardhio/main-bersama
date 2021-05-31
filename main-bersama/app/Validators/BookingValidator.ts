@@ -25,7 +25,7 @@ export default class BookingValidator {
 	 *    ```
 	 */
   public schema = schema.create({
-	  play_date_start: schema.date({format: 'dd-MM-yyyy HH:mm:ss'},[
+	  play_date_start: schema.date({format: 'yyyy-MM-dd HH:mm:ss'},[
 		  rules.after('today')
 	  ]),
 	  play_date_end: schema.string({},[
@@ -34,7 +34,7 @@ export default class BookingValidator {
 	  field_id: schema.number([
 		  rules.unsigned(),
 		  rules.exists({table: 'fields', column: 'id'})
-	  ])
+	  ]),
   })
 
 	/**
@@ -52,6 +52,6 @@ export default class BookingValidator {
 	  'required': '{{ field }} tidak boleh kosong',
 	  'play_date_start.after': 'Pemesanan minimal 1 hari sebelum bermain',
 	  'play_date_end.maxLength': '{{ field }} hanya menerima maksimal 45 karakter',
-	  'field_id.exists': '{{ field }} harus tersedia pada field.id'
+	  'exists': '{{ field }} harus tersedia pada field.id'
   }
 }
