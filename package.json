@@ -31,7 +31,6 @@
     "@adonisjs/view": "^6.0.2",
     "adonis5-swagger": "^1.2.3",
     "luxon": "^1.27.0",
-    "mysql": "^2.18.1",
     "pg": "^8.6.0",
     "phc-bcrypt": "^1.0.7",
     "proxy-addr": "^2.0.6",
