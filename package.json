@@ -2,6 +2,9 @@
   "name": "main-bersama",
   "version": "1.0.0",
   "private": true,
+  "engines": {
+    "node": "14.16.1"
+  },
   "scripts": {
     "build": "node ace build --prod",
     "start": "node ace serve --watch",
@@ -24,6 +27,7 @@
     "@adonisjs/view": "^3.1.0",
     "adonis5-swagger": "^1.2.3",
     "luxon": "^1.27.0",
+    "mysql": "^2.18.1",
     "pg": "^8.6.0",
     "phc-bcrypt": "^1.0.7",
     "proxy-addr": "^2.0.6",
