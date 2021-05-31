@@ -6,7 +6,7 @@
     "node": "14.16.1"
   },
   "scripts": {
-    "build": "node ace build --prod",
+    "build": "node ace build --production",
     "start": "node ace serve --watch",
     "start:prod": "node ./build/server.js"
   },
